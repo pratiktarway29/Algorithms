@@ -45,34 +45,41 @@ function solution(S, P, Q) {
     const N = S.length;
     const M = P.length;
     
-    // Create arrays for prefix sums of each nucleotide type
+    // Create prefix sum arrays for each nucleotide type
     const prefixSumA = new Array(N + 1).fill(0);
     const prefixSumC = new Array(N + 1).fill(0);
     const prefixSumG = new Array(N + 1).fill(0);
     
-    for (let i = 0; i < N; i++) {
-        prefixSumA[i + 1] = prefixSumA[i] + (S[i] === 'A' ? 1 : 0);
-        prefixSumC[i + 1] = prefixSumC[i] + (S[i] === 'C' ? 1 : 0);
-        prefixSumG[i + 1] = prefixSumG[i] + (S[i] === 'G' ? 1 : 0);
+    for (let i = 1; i <= N; i++) {
+        prefixSumA[i] = prefixSumA[i - 1] + (S[i - 1] === 'A' ? 1 : 0);
+        prefixSumC[i] = prefixSumC[i - 1] + (S[i - 1] === 'C' ? 1 : 0);
+        prefixSumG[i] = prefixSumG[i - 1] + (S[i - 1] === 'G' ? 1 : 0);
     }
     
-    const results = [];
-    
-    // Process each query
+    // Process queries
+    const result = [];
     for (let k = 0; k < M; k++) {
-        const start = P[k];
-        const end = Q[k] + 1;
+        const countA = prefixSumA[Q[k] + 1] - prefixSumA[P[k]];
+        const countC = prefixSumC[Q[k] + 1] - prefixSumC[P[k]];
+        const countG = prefixSumG[Q[k] + 1] - prefixSumG[P[k]];
         
-        if (prefixSumA[end] - prefixSumA[start] > 0) {
-            results.push(1); // A has the lowest impact factor
-        } else if (prefixSumC[end] - prefixSumC[start] > 0) {
-            results.push(2); // C
-        } else if (prefixSumG[end] - prefixSumG[start] > 0) {
-            results.push(3); // G
+        if (countA > 0) {
+            result.push(1);
+        } else if (countC > 0) {
+            result.push(2);
+        } else if (countG > 0) {
+            result.push(3);
         } else {
-            results.push(4); // T
+            result.push(4);
         }
     }
     
-    return results;
+    return result;
 }
+
+// Example usage
+const S = "CAGCCTA";
+const P = [2, 5, 0];
+const Q = [4, 5, 6];
+console.log(solution(S, P, Q)); // Output: [2, 4, 1]
+

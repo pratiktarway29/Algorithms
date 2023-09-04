@@ -36,7 +36,6 @@ B[K] ≤ B[K + 1], for each K (0 ≤ K < N − 1).
 
 # Solution:
 function solution(A, B) {
-    // Implement your solution here
     const N = A.length;
 
     if (N === 0) {
@@ -48,11 +47,9 @@ function solution(A, B) {
 
     for (let i = 0; i < N; i++) {
         if (A[i] > lastEnd) {
-            // The current segment doesn't overlap with previous ones
             nonOverlappingCount++;
             lastEnd = B[i];
         }
-        // If there's an overlap, skip the current segment
     }
 
     return nonOverlappingCount;

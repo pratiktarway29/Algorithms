@@ -44,6 +44,8 @@ each element of array A is an integer within the range [−10,000..10,000].
 
 
 # Solution:
+Mathematical observation - Every Slice can be broken into 2 or 3 slices.
+
 function solution(A) {
     const N = A.length;
     let min_avg = (A[0] + A[1]) / 2; // Initialize with average of first 2 elements

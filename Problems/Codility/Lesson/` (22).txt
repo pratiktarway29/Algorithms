@@ -62,7 +62,7 @@ function solution(K, M, A) {
                 currentBlockSum += num;
             }
             
-            if (blockCount >= K) {
+            if (blockCount > K) {
                 return false;
             }
         }

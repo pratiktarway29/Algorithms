@@ -41,27 +41,33 @@ each element of array A is an integer within the range [0..M].
 # Solution:
 function solution(M, A) {
     const N = A.length;
-    const lastSeen = new Array(M + 1).fill(-1);
-    let count = 0;
-    let left = 0;
+    const maxDistinct = 1000000000; // Maximum allowed distinct slices
 
-    for (let right = 0; right < N; right++) {
-        if (lastSeen[A[right]] >= left) {
-            left = lastSeen[A[right]] + 1;
+    let distinctCount = 0; 
+    let left = 0; 
+    let right = 0; 
+    const seen = new Set(); 
+
+    while (right < N) {
+        if (!seen.has(A[right])) {
+            seen.add(A[right]);
+            distinctCount += seen.size;
+            right++;
+        } else {
+            seen.delete(A[left]); 
+            left++;
         }
-        
-        lastSeen[A[right]] = right;
-        count += (right - left + 1);
-        
-        if (count > 1_000_000_000) {
-            return 1_000_000_000;
+
+        if (distinctCount > maxDistinct) {
+            return maxDistinct;
         }
     }
 
-    return count;
+    return distinctCount;
 }
 
 // Example usage
 const M = 6;
 const A = [3, 4, 5, 5, 2];
 console.log(solution(M, A)); // Output: 9
+

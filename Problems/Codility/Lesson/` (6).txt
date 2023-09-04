@@ -36,7 +36,7 @@ function solution(S) {
         if (char in brackets) {
             stack.push(char);
         } else {
-            if (stack.length === 0 || brackets[stack.pop()] !== char) {
+            if (brackets[stack.pop()] !== char) {
                 return 0;
             }
         }

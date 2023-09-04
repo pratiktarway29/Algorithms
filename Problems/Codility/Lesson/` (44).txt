@@ -21,13 +21,10 @@ A ≤ B.
 
 # Solution:
 function solution(A, B, K) {
-    // Count of numbers divisible by K up to B
     const countUpToB = Math.floor(B / K);
 
-    // Count of numbers divisible by K up to A-1
     const countUpToAminus1 = Math.floor((A - 1) / K);
 
-    // The final count within the range [A..B]
     const result = countUpToB - countUpToAminus1;
 
     return result;

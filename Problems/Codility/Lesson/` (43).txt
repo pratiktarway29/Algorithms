@@ -45,16 +45,16 @@ each element of array A is an integer that can have one of the following values:
 # Solution:
 function solution(A) {
     const N = A.length;
-    let eastCars = 0; // Count of eastward cars
-    let passingPairs = 0; // Count of passing pairs
+    let eastCars = 0; 
+    let passingPairs = 0; 
     
     for (let i = 0; i < N; i++) {
         if (A[i] === 0) {
             eastCars++;
-        } else { // A[i] === 1
+        } else { 
             passingPairs += eastCars;
             if (passingPairs > 1000000000) {
-                return -1; // Check for exceeding the limit
+                return -1; 
             }
         }
     }

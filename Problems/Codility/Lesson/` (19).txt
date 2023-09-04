@@ -51,7 +51,7 @@ function solution(N, P, Q) {
         primes[0] = primes[1] = false;
         for (let i = 2; i * i <= maxN; i++) {
             if (primes[i]) {
-                for (let j = i * i; j <= maxN; j += i) {
+                for (let j = i+i; j <= maxN; j += i) {
                     primes[j] = false;
                 }
             }
@@ -60,7 +60,7 @@ function solution(N, P, Q) {
         // Generate semiprimes using primes
         for (let i = 2; i*i <= maxN; i++) {
             if (primes[i]) {
-                for (let j = i; i * j <= maxN; j++) {
+                for (let j = i; i * j <= maxN; j++) {  
                     if (primes[j]) {
                         isSemiprime[i * j] = true;
                     }
